@@ -1,4 +1,6 @@
 ﻿using AspNetCoreRateLimit;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using TiendaWebApi.Interfaces;
 using TiendaWebApi.Services;
 
@@ -40,7 +42,7 @@ public static class ApplicationServiceExtensions
                     new RateLimitRule
                     {
                         Endpoint ="*",
-                        Period = "10s",
+                        Period = "5s",
                         Limit =2
                     }
                 };
@@ -48,7 +50,7 @@ public static class ApplicationServiceExtensions
 
 
     }
-    /*
+    
 
     public static void ConfigureApiVersioning(this IServiceCollection services)
     {
@@ -65,5 +67,5 @@ public static class ApplicationServiceExtensions
         });
     }
 
-    */
+    
 }

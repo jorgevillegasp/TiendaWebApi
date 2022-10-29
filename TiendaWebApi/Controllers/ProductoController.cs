@@ -8,6 +8,11 @@ using TiendaWebApi.Models;
 
 namespace TiendaWebApi.Controllers
 {
+
+    [ApiVersion("1.0")]
+    [ApiVersion("1.1")]
+
+
     [Route("api/[controller]")]
     [ApiController]
     public class ProductoController : ControllerBase
@@ -31,6 +36,19 @@ namespace TiendaWebApi.Controllers
                                         .GetAllAsync();
 
             return _mapper.Map<List<ProductoListDto>>(productos);
+        }
+
+
+        [HttpGet]
+        [ApiVersion("1.1")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<ProductoDto>>> Get11()
+        {
+            var productos = await _unitOfWork.Productos
+                                        .GetAllAsync();
+
+            return _mapper.Map<List<ProductoDto>>(productos);
         }
 
         [HttpGet("{id}")]

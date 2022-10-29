@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureCors();
 builder.Services.ConfigureRateLimitiong();
 builder.Services.AddAplicacionServices();
-//builder.Services.ConfigureApiVersioning();
+builder.Services.ConfigureApiVersioning();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
