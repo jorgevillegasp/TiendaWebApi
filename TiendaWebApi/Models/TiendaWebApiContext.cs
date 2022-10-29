@@ -57,9 +57,7 @@ namespace TiendaWebApi.Models
             {
                 entity.ToTable("producto");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.CategoriaId).HasColumnName("categoriaId");
 
@@ -78,17 +76,15 @@ namespace TiendaWebApi.Models
                     .HasColumnType("decimal(10, 2)")
                     .HasColumnName("precio");
 
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.Producto)
-                    .HasForeignKey<Producto>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_producto_categoria");
+                entity.HasOne(d => d.Categoria)
+                    .WithMany(p => p.Productos)
+                    .HasForeignKey(d => d.CategoriaId)
+                    .HasConstraintName("FK_producto_categoria");
 
-                entity.HasOne(d => d.Id1)
-                    .WithOne(p => p.Producto)
-                    .HasForeignKey<Producto>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_producto_marca");
+                entity.HasOne(d => d.Marca)
+                    .WithMany(p => p.Productos)
+                    .HasForeignKey(d => d.MarcaId)
+                    .HasConstraintName("FK_producto_marca");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using TiendaWebApi.Models;
 
 namespace TiendaWebApi.Models
 {
     public partial class Categoria : BaseEntity
     {
-        //public int Id { get; set; }
-        public string? Nombre { get; set; }
+        public Categoria()
+        {
+            Productos = new HashSet<Producto>();
+        }
 
-        public virtual Producto? Producto { get; set; }
+        //public int Id { get; set; }
+        public string Nombre { get; set; }
+
+        public virtual ICollection<Producto> Productos { get; set; }
     }
 }

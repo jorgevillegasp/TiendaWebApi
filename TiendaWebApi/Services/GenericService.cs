@@ -3,8 +3,6 @@ using System.Linq.Expressions;
 using TiendaWebApi.Interfaces;
 using TiendaWebApi.Models;
 
-
-
 namespace Infrastructure.Repositories;
 
 public class GenericService<T> : GenericInterface<T> where T : BaseEntity
