@@ -13,7 +13,15 @@ builder.Services.ConfigureRateLimitiong();
 builder.Services.AddAplicacionServices();
 builder.Services.ConfigureApiVersioning();
 
-builder.Services.AddControllers();
+
+//Permitimos el soporte de formato XML en las devoluciones
+builder.Services.AddControllers(options =>
+{
+    options.RespectBrowserAcceptHeader = true;
+    options.ReturnHttpNotAcceptable = true;
+}).AddXmlSerializerFormatters();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
