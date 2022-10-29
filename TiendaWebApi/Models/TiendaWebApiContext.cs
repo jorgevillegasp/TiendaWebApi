@@ -19,6 +19,9 @@ namespace TiendaWebApi.Models
         public virtual DbSet<Categoria> Categoria { get; set; } = null!;
         public virtual DbSet<Marca> Marcas { get; set; } = null!;
         public virtual DbSet<Producto> Productos { get; set; } = null!;
+        public virtual DbSet<Rol> Rols { get; set; } = null!;
+        public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
+        public virtual DbSet<UsuariosRoles> UsuariosRoles { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -86,6 +89,78 @@ namespace TiendaWebApi.Models
                     .HasForeignKey(d => d.MarcaId)
                     .HasConstraintName("FK_producto_marca");
             });
+
+
+            modelBuilder.Entity<Rol>(entity =>
+            {
+                entity.ToTable("rol");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("nombre");
+            });
+
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.ToTable("usuario");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.ApellidoMaterno)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("apellidoMaterno");
+
+                entity.Property(e => e.ApellidoPaterno)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("apellidoPaterno");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("email");
+
+                entity.Property(e => e.Nombres)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("nombres");
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("password");
+
+                entity.Property(e => e.UserName)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("userName");
+            });
+
+            modelBuilder.Entity<UsuariosRoles>(entity =>
+            {
+                entity.ToTable("usuariosRoles");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.RolId).HasColumnName("rolId");
+
+                entity.Property(e => e.UsuarioId).HasColumnName("usuarioId");
+
+                entity.HasOne(d => d.Rol)
+                    .WithMany(p => p.UsuariosRoles)
+                    .HasForeignKey(d => d.RolId)
+                    .HasConstraintName("FK_usuarioRol_rol");
+
+                entity.HasOne(d => d.Usuario)
+                    .WithMany(p => p.UsuariosRoles)
+                    .HasForeignKey(d => d.UsuarioId)
+                    .HasConstraintName("FK_usuarioRol_usuario");
+            });
+
 
             OnModelCreatingPartial(modelBuilder);
         }
