@@ -1,4 +1,5 @@
-﻿using TiendaWebApi.Interfaces;
+﻿using AspNetCoreRateLimit;
+using TiendaWebApi.Interfaces;
 using TiendaWebApi.Services;
 
 namespace TiendaWebApi.Extensions;
@@ -16,12 +17,12 @@ public static class ApplicationServiceExtensions
     public static void AddAplicacionServices(this IServiceCollection services)
     {
         //services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        //services.AddScoped<IProductoRepository, ProductoRepository>();
+        //services.AddScoped<ProductoInterface, ProductoService>();
         //services.AddScoped<IMarcaRepository, MarcaRepository>();
         //services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         services.AddScoped<UnitOfWorkInterface, UnitOfWorkService>();
     }
-    /*
+    
     public static void ConfigureRateLimitiong(this IServiceCollection services)
     {
         services.AddMemoryCache();
@@ -47,6 +48,7 @@ public static class ApplicationServiceExtensions
 
 
     }
+    /*
 
     public static void ConfigureApiVersioning(this IServiceCollection services)
     {

@@ -1,15 +1,16 @@
+using AspNetCoreRateLimit;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using TiendaWebApi.Extensions;
-using TiendaWebApi.Interfaces;
 using TiendaWebApi.Models;
-using TiendaWebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+// Agregar servicios al contenedor.
 builder.Services.ConfigureCors();
-//builder.Services.AddAplicacionServices();
+builder.Services.ConfigureRateLimitiong();
+builder.Services.AddAplicacionServices();
 //builder.Services.ConfigureApiVersioning();
 
 builder.Services.AddControllers();
@@ -34,6 +35,9 @@ builder.Services.AddDbContext<TiendaWebApiContext>(options =>
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 
 var app = builder.Build();
+
+//Uso del miliwor para usar el limitador
+app.UseIpRateLimiting();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
