@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using TiendaWebApi.Interfaces;
 using TiendaWebApi.Models;
 using TiendaWebApi.Services;
@@ -27,6 +28,7 @@ builder.Services.AddScoped<UnitOfWorkInterface, UnitOfWorkService>();
 builder.Services.AddDbContext<TiendaWebApiContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
 
+builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 
 var app = builder.Build();
 

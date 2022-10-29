@@ -14,5 +14,9 @@ namespace TiendaWebApi.Models
 
         public virtual Marca Id1 { get; set; } = null!;
         public virtual Categoria IdNavigation { get; set; } = null!;
+
+        //Agregado manualmente para pruebas
+        public Marca Marca { get; set; }
+        public Categoria Categoria { get; set; }
     }
 }

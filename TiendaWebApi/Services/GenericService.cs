@@ -16,17 +16,17 @@ public class GenericService<T> : GenericInterface<T> where T : BaseEntity
         _context = context;
     }
 
-    public void Add(T entity)
+    public virtual void Add(T entity)
     {
         throw new NotImplementedException();
     }
 
-    public void AddRange(IEnumerable<T> entities)
+    public virtual void AddRange(IEnumerable<T> entities)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+    public virtual IEnumerable<T> Find(Expression<Func<T, bool>> expression)
     {
         throw new NotImplementedException();
     }
@@ -36,12 +36,12 @@ public class GenericService<T> : GenericInterface<T> where T : BaseEntity
         return await _context.Set<T>().ToListAsync();
     }
 
-    public Task<T> GetByIdAsync(int id)
+    public virtual Task<T> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(T entity)
+    public virtual void Remove(T entity)
     {
         throw new NotImplementedException();
     }
@@ -51,7 +51,7 @@ public class GenericService<T> : GenericInterface<T> where T : BaseEntity
         throw new NotImplementedException();
     }
 
-    public void Update(T entity)
+    public virtual void Update(T entity)
     {
         throw new NotImplementedException();
     }
