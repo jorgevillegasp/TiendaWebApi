@@ -138,7 +138,23 @@ namespace TiendaWebApi.Models
                     .HasMaxLength(200)
                     .IsUnicode(false)
                     .HasColumnName("userName");
-            });
+
+                entity.HasMany(p => p.Roles)
+                    .WithMany(p => p.Usuarios)
+                    .UsingEntity<UsuariosRoles>(
+                        j => j
+                            .HasOne(pt => pt.Rol)
+                            .WithMany(t => t.UsuariosRoles)
+                            .HasForeignKey(pt => pt.RolId),
+                        j => j
+                            .HasOne(pt => pt.Usuario)
+                            .WithMany(p => p.UsuariosRoles)
+                            .HasForeignKey(pt => pt.UsuarioId),
+                        j =>
+                        {
+                            j.HasKey(t => new { t.UsuarioId, t.RolId });
+                        });
+                        });
 
             modelBuilder.Entity<UsuariosRoles>(entity =>
             {

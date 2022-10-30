@@ -1,0 +1,12 @@
+************* pruebas de busqueda *************
+posicion de pagina:
+http://localhost:5240/api/Producto?pageIndex=2
+
+limite de datos :
+http://localhost:5240/api/Producto?pageSize=2
+
+busqueda:
+http://localhost:5240/api/Producto?search=Mazda
+
+
+Scaffold-DbContext "Server=localhost;Database=TiendaWebApi;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
