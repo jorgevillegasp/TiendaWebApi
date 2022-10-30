@@ -1,4 +1,4 @@
-﻿using Infrastructure.Repositories;
+﻿using TiendaWebApi.Repositories;
 using Microsoft.EntityFrameworkCore;
 using TiendaWebApi.Interfaces;
 using TiendaWebApi.Models;

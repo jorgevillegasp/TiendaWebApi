@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using TiendaWebApi.Interfaces;
 using TiendaWebApi.Models;
 
-namespace Infrastructure.Repositories;
+namespace TiendaWebApi.Repositories;
 
 public class GenericService<T> : GenericInterface<T> where T : BaseEntity
 {

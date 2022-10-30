@@ -1,4 +1,4 @@
-﻿using Infrastructure.Repositories;
+﻿using TiendaWebApi.Repositories;
 using TiendaWebApi.Interfaces;
 using TiendaWebApi.Models;
 

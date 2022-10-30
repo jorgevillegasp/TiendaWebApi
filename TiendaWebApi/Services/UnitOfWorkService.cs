@@ -1,7 +1,6 @@
-﻿using Infrastructure.Repositories;
+﻿using TiendaWebApi.Repositories;
 using TiendaWebApi.Interfaces;
 using TiendaWebApi.Models;
-using TiendaWebApi.Repositories;
 
 namespace TiendaWebApi.Services
 {
