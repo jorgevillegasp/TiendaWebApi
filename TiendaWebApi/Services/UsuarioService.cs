@@ -18,6 +18,11 @@ namespace TiendaWebApi.Services
         private readonly JWT _jwt;
         private readonly UnitOfWorkInterface _unitOfWork;
         private readonly IPasswordHasher<Usuario> _passwordHasher;
+
+        public UsuarioService(TiendaWebApiContext context) : base(context)
+        {
+        }
+
         public UsuarioService(
             TiendaWebApiContext context, 
             UnitOfWorkInterface unitOfWork, 
@@ -49,6 +54,7 @@ namespace TiendaWebApi.Services
 
         public async Task<string> RegisterAsync(RegisterDto registerDto)
         {
+            //Establecemos la informacion de un usuario
             var usuario = new Usuario
             {
                 Nombres = registerDto.Nombres,
@@ -58,19 +64,26 @@ namespace TiendaWebApi.Services
                 UserName = registerDto.UserName
             };
 
+            //Incriptamos la contraseña
             usuario.Password = _passwordHasher.HashPassword(usuario, registerDto.Password);
 
             var usuarioExiste = _unitOfWork.Usuarios
-                                        .Find(u => u.UserName.ToLower() == registerDto.Username.ToLower())
+                                        .Find(u => u.UserName.ToLower() == registerDto.UserName.ToLower())
                                         .FirstOrDefault();
 
+            //Validamos si existe el usuario con ese userName en la Base de datos
             if (usuarioExiste == null)
             {
+                //Buscamos el rol determinado
                 var rolPredeterminado = _unitOfWork.Roles
                                         .Find(u => u.Nombre == Autorizacion.rol_predeterminado.ToString())
                                         .First();
                 try
                 {
+                    //Asignamos a la coleccion de roles,
+                    //agrego el usuario
+                    //guardo los cambios 
+                    //Regresamos una cadema de exito
                     usuario.Roles.Add(rolPredeterminado);
                     _unitOfWork.Usuarios.Add(usuario);
                     await _unitOfWork.SaveAsync();

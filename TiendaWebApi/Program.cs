@@ -12,6 +12,7 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureRateLimitiong();
 builder.Services.AddAplicacionServices();
 builder.Services.ConfigureApiVersioning();
+builder.Services.AddJwt(builder.Configuration);
 
 
 //Permitimos el soporte de formato XML en las devoluciones
@@ -54,6 +55,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
